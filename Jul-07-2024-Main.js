@@ -1,4 +1,4 @@
-const Stack = require('Jul-07-2024-Stack');
+const Stack = require('./Stack.js');
 const prompt = require('prompt-sync')();
 // ------------------------------
 // Initialization
@@ -6,7 +6,7 @@ const prompt = require('prompt-sync')();
 const backPages = new Stack();
 const nextPages = new Stack();
 let currentPage = 'Current Page';
-let finish = false;
+
 // ------------------------------
 // Helper Functions
 // ------------------------------
@@ -54,7 +54,31 @@ const question = 'Where would you like to go today? '
 // ------------------------------
 // User Interface Part 1
 // ------------------------------
-console.log(baseInfo, ' ', quitInfo, ' ', question)
+let finish = false;
+let showBack = false;
+let showNext = false;
+
+this.showCurrentPage();
+while (finish) {
+  let instructions = baseInfo;
+  if (!backPages.isEmpty()){
+    instructions += backInfo + ', ';
+    showBack = true;
+  } else {
+    showBack = false;
+  }
+
+  if (!nextPages.isEmpty()) {
+    instructions += nextInfo + ', ';
+    showNext = true;
+  } else {
+    showNext = false;
+  }
+
+  instructions += quitInfo  + ', '
+  console.log(instructions)
+}
   // ------------------------------
   // User Interface Part 2
   // ------------------------------
+  
