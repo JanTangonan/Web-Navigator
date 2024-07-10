@@ -10,7 +10,7 @@ let currentPage = 'Current Page';
 // ------------------------------
 // Helper Functions
 // ------------------------------
-newPage = (page) => {
+const newPage = (page) => {
   backPages.push(currentPage);
   currentPage = page;
   
@@ -22,19 +22,19 @@ newPage = (page) => {
   showCurrentPage("NEW: ");
 }
 
-backPage = () => {
+const backPage = () => {
   nextPage.push(currentPage);
   currentPage = backPages.pop();
   showCurrentPage("BACK: ");
 }
 
-nextPage = () => {
+const nextPage = () => {
   backPages.push(currentPage);
   currentPage = nextPages.pop();
   showCurrentPage("NEXT: ");
 }
 
-showCurrentPage = (action) => {
+const showCurrentPage = (action) => {
   console.log(`\n${action}`);
   console.log(`Current page = ${currentPage}`);
   console.log('Back page = ', backPages.peek());
@@ -58,27 +58,45 @@ let finish = false;
 let showBack = false;
 let showNext = false;
 
-this.showCurrentPage();
+showCurrentPage(default)
 while (finish) {
   let instructions = baseInfo;
-  if (!backPages.isEmpty()){
-    instructions += backInfo + ', ';
+  if(!backPages.isEmpty()){
+    instructions += backInfo + ',';
     showBack = true;
   } else {
     showBack = false;
   }
 
-  if (!nextPages.isEmpty()) {
-    instructions += nextInfo + ', ';
+  if(!nextPages.isEmpty()){
+    instructions += nextInfo + ',';
     showNext = true;
   } else {
-    showNext = false;
+    showBack = false;
   }
 
-  instructions += quitInfo  + ', '
+  instructions += quitInfo;
   console.log(instructions)
-}
+
   // ------------------------------
   // User Interface Part 2
   // ------------------------------
+  const answer = prompt(question)
+  let lowerCaseAnswer = answer.toLowerCase();
+
+  if ((lowerCaseAnswer !== 'b') && 
+      (lowerCaseAnswer !== 'n') &&
+      (lowerCaseAnswer !== 'q')) {
+        newPage(answer);
+  } else if ((lowerCaseAnswer === 'b') &&
+             (showBack === true)) {
+    backPage();
+  } else if ((lowerCaseAnswer === 'n') &&
+             (showNext === true)) {
+    nextPage();
+  }
+  
+
+}
+
   
