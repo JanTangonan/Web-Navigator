@@ -58,7 +58,7 @@ let finish = false;
 let showBack = false;
 let showNext = false;
 
-showCurrentPage(default)
+showCurrentPage()
 while (finish) {
   let instructions = baseInfo;
   if(!backPages.isEmpty()){
@@ -94,9 +94,15 @@ while (finish) {
   } else if ((lowerCaseAnswer === 'n') &&
              (showNext === true)) {
     nextPage();
+  } else if ((lowerCaseAnswer === 'b') &&
+             (showBack === false)) {
+    console.log('Cannot go back a page. Stack is empty.');
+  } else if ((lowerCaseAnswer === 'n') &&
+             (showNext === false)) {
+    console.log('Cannot go to the next page. Stack is empty.');
+  } else if (lowerCaseAnswer === 'q') {
+    finish = true;
   }
-  
-
 }
 
   
